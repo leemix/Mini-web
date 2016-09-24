@@ -8,7 +8,7 @@ define('ENVIRONMENT', 'DEVELOPMENT');
 define('HOST', 'localhost');
 define('USERNAME', 'root');
 define('PASSWORD', '');
-define('DB', 'blog');
+define('DB', 'gcsql');
 
 switch(ENVIRONMENT)
 {
