@@ -27,14 +27,20 @@ use app\data\Registry;
 $registry = registry::getInstance();
 $registry->set('conexao', new PDO('mysql:host='.HOST.';dbname='.DB.'', USERNAME, PASSWORD));
 $PDO = registry::getInstance()->get('conexao');
+$allowuri = array('index');
 
 if(isset($_GET['pg'])) {
 	$pg = $_GET['pg'];
-	if(file_exists("public/{$pg}.php")) {
-		include 'public/includes/header.php';
-		include "public/{$pg}.php";
-		include 'public/includes/footer.php';
+	
+	if(in_array($_GET['pg'], $allowuri)) {
+	    if(file_exists("public/{$pg}.php")) {
+		    include 'public/includes/header.php';
+		    include "public/{$pg}.php";
+		    include 'public/includes/footer.php';
+	    } else {
+		    die('A página requisitada não existe!');
+	    }
 	} else {
-		die('A página requisitada não existe!');
+		throw new Exception('A página requisitada não existe!'); 
 	}
 }

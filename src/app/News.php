@@ -28,7 +28,7 @@ class News {
     }
 
 	public function NewsFromInput() {
-		if($_SERVER['REQUEST_METHOD'] == 'News') {
+		if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$Newspec = array(
 				'titulo' => FILTER_SANITIZE_STRING,
 				'descricao' => FILTER_SANITIZE_STRING,
@@ -37,7 +37,7 @@ class News {
 
 		    $News = array_filter(filter_var_array($_News, $Newspec));
 
-		    if(count($_News) == count($News)) {
+		    if(count($_POST) == count($News)) {
 		    	$News = new Entity\NewsEntity();
 		    	$News->setTitulo($News['titulo']);
 		    	$News->setDescricao($News['descricao']);
